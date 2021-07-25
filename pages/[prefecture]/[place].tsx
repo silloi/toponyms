@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
 import { client } from "../../libs/client";
-import getPrefecturePlace from '../../utils/position'
+import { getPrefecturePlace } from '../../utils/position'
 import dynamic from 'next/dynamic'
 
 export const Place = ({ place, position }) => {

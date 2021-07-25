@@ -3,7 +3,7 @@ import { MapContainer, TileLayer, Marker, Tooltip } from 'react-leaflet'
 import Head from 'next/head'
 
 const Map = ({ center, placeList }) => {
-  const [zoom, setZoom] = useState(13);
+  const [zoom, setZoom] = useState(12);
 
   return (
     <div>

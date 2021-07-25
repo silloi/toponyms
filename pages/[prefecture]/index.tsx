@@ -4,11 +4,11 @@ import { useRouter } from 'next/router'
 import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
 import { client } from "../../libs/client";
-import getPrefecturePlace from '../../utils/position'
+import { getPrefecture, getPrefecturePlace } from '../../utils/position'
 import PREFECTURE from '../../db/prefecture'
 import dynamic from 'next/dynamic'
 
-export const Prefecture = ({ placeList }) => {
+export const Prefecture = ({ center, placeList }) => {
   const router = useRouter()
   const [searchText, setSearchText] = useState('')
 
@@ -28,7 +28,7 @@ export const Prefecture = ({ placeList }) => {
           return (
           <li key={place.id}>{place.name} {place.lat}</li>
         )})}
-        <MapPlace center={["34.679341", "135.491931"]} placeList={placeList}/>
+        <MapPlace center={center} placeList={placeList}/>
       </div>
     )
   }
@@ -44,6 +44,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const prefecture = params.prefecture.toString()
+
+  const center = getPrefecture(prefecture)
   
   const data: any = await client.get({ endpoint: "nandoku", queries: { filters: `prefecture[contains]${prefecture}` } })
 
@@ -58,6 +60,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   console.log('List', placeList)
   return {
     props: {
+      center,
       placeList,
     },
   }
