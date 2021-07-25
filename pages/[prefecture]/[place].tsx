@@ -7,7 +7,7 @@ import { client } from "../../libs/client";
 import { getPrefecturePlace } from '../../utils/position'
 import dynamic from 'next/dynamic'
 
-export const Place = ({ place, position }) => {
+export const Place = ({ place }) => {
   const router = useRouter()
   const [searchText, setSearchText] = useState('')
 
@@ -15,7 +15,7 @@ export const Place = ({ place, position }) => {
    * Get Map component to import leaflet with CSR
    * Because leaflet does not support SSR
    */
-  const Map: any = dynamic(() => import('../../components/Map'), { ssr: false });
+  const MapPlace: any = dynamic(() => import('../../components/MapPlace'), { ssr: false });
 
   if (router.isFallback) {
     return <div>Loading...</div>
@@ -23,8 +23,8 @@ export const Place = ({ place, position }) => {
     return (
       <div>
         <p>{place.name}</p>
-        <p>{position}</p>
-        <Map center={position} positionList={[position]} />
+        <p>{place.position}</p>
+        <MapPlace center={place.position} placeList={[place]} />
       </div>
     )
   }
@@ -52,8 +52,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   return {
     props: {
       // `props` key の inside で結果を返す
-      place: data.contents[0],
-      position,
+      place: 
+        { ...data.contents[0],
+          position,
+        },
     },
   }
 }
