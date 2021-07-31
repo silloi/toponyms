@@ -18,7 +18,6 @@ export const Prefecture = ({ center, placeList }) => {
    */
   const MapPlace: any = dynamic(() => import('../../components/MapPlace'), { ssr: false });
 
-  
   if (router.isFallback) {
     return <div>Loading...</div>
   } else {

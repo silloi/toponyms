@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { MapContainer, TileLayer, Marker, Tooltip } from 'react-leaflet'
 import Head from 'next/head'
+import Link from 'next/link'
 
 const Map = ({ center, placeList }) => {
   const [zoom, setZoom] = useState(12);
@@ -21,7 +22,9 @@ const Map = ({ center, placeList }) => {
           return (
             <Marker key={place.id} position={place.position}>
               <Tooltip permanent interactive>
-                <strong><a href={`/${place.prefecture[0]}/${place.name}`}>{place.name}</a></strong>
+                <Link href={`/${place.prefecture[0]}/${place.name}`}>
+                  <a>{place.name}</a>
+                </Link>
               </Tooltip>
             </Marker>
           )
