@@ -2,101 +2,30 @@ import Link from 'next/link'
 import PREFECTURE from '../db/prefecture'
 
 const Footer = () => {
-  const hokkaido = PREFECTURE.filter((prefecture) => prefecture.region === '北海道・東北')
-  const kanto = PREFECTURE.filter((prefecture) => prefecture.region === '関東')
-  const hokuriku = PREFECTURE.filter((prefecture) => prefecture.region === '北陸・甲信越')
-  const tokai = PREFECTURE.filter((prefecture) => prefecture.region === '東海')
-  const kansai = PREFECTURE.filter((prefecture) => prefecture.region === '関西')
-  const chugoku = PREFECTURE.filter((prefecture) => prefecture.region === '中国・四国')
-  const kyushu = PREFECTURE.filter((prefecture) => prefecture.region === '九州・沖縄')
+  const regionList = Array.from(new Set(PREFECTURE.map((prefecture) => prefecture.region)))
 
   return (
-      <footer>
-        <p>北海道・東北</p>
-        <ul className="flex space-x-4">
-          {hokkaido.map((prefecture) => {
-            return (
-              <li key={prefecture.id}>
-                <Link href={`/${prefecture.name}`}>
-                  <a>{prefecture.name}</a>
-                </Link>
-              </li>
-            )
-          })}
-        </ul>
-        <p>関東</p>
-        <ul className="flex space-x-4">
-          {kanto.map((prefecture) => {
-            return (
-              <li key={prefecture.id}>
-                <Link href={`/${prefecture.name}`}>
-                  <a>{prefecture.name}</a>
-                </Link>
-              </li>
-            )
-          })}
-        </ul>
-        <p>北陸・甲信越</p>
-        <ul className="flex space-x-4">
-          {hokuriku.map((prefecture) => {
-            return (
-              <li key={prefecture.id}>
-                <Link href={`/${prefecture.name}`}>
-                  <a>{prefecture.name}</a>
-                </Link>
-              </li>
-            )
-          })}
-        </ul>
-        <p>東海</p>
-        <ul className="flex space-x-4">
-          {tokai.map((prefecture) => {
-            return (
-              <li key={prefecture.id}>
-                <Link href={`/${prefecture.name}`}>
-                  <a>{prefecture.name}</a>
-                </Link>
-              </li>
-            )
-          })}
-        </ul>
-        <p>関西</p>
-        <ul className="flex space-x-4">
-          {kansai.map((prefecture) => {
-            return (
-              <li key={prefecture.id}>
-                <Link href={`/${prefecture.name}`}>
-                  <a>{prefecture.name}</a>
-                </Link>
-              </li>
-            )
-          })}
-        </ul>
-        <p>中国・四国</p>
-        <ul className="flex space-x-4">
-          {chugoku.map((prefecture) => {
-            return (
-              <li key={prefecture.id}>
-                <Link href={`/${prefecture.name}`}>
-                  <a>{prefecture.name}</a>
-                </Link>
-              </li>
-            )
-          })}
-        </ul>
-        <p>九州・沖縄</p>
-        <ul className="flex space-x-4">
-          {kyushu.map((prefecture) => {
-            return (
-              <li key={prefecture.id}>
-                <Link href={`/${prefecture.name}`}>
-                  <a>{prefecture.name}</a>
-                </Link>
-              </li>
-            )
-          })}
-        </ul>
-      </footer>
+    <footer className="px-4 py-2">
+      <h2 className="text-lg">都道府県から探す</h2>
+      {regionList.map((region: string) => {
+        return (
+          <div className="mb-2">
+            <p className="w-40">{region}</p>
+            <ul className="flex flex-wrap">
+              {PREFECTURE.filter((prefecture) => prefecture.region === region).map((prefecture) => {
+                return (
+                  <li key={prefecture.id} className="pr-2">
+                    <Link href={`/${prefecture.name}`}>
+                      <a className="hover:underline text-gray-500">{prefecture.name}</a>
+                    </Link>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+        )
+      })}
+    </footer>
   )
 }
 
