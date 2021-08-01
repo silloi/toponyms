@@ -22,8 +22,10 @@ export const Place = ({ place }) => {
   } else {
     return (
       <div>
-        <p>{place.name}</p>
-        <p>{place.position}</p>
+        <div className="px-4">
+          <h1 className="text-2xl">{place.name}（{place.kana}）</h1>
+          <p>{place.address}</p>
+        </div>
         <MapPlace center={place.position} placeList={[place]} />
       </div>
     )
@@ -48,12 +50,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   
   const data: any = await client.get({ endpoint: "nandoku", queries: { filters: `name[equals]${place}` } })
 
-  const position = getPrefecturePlace(data.contents[0])
+  const { address, position }  = getPrefecturePlace(data.contents[0])
   return {
     props: {
       // `props` key の inside で結果を返す
       place: 
         { ...data.contents[0],
+          address,
           position,
         },
     },

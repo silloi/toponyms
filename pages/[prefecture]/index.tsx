@@ -49,7 +49,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const data: any = await client.get({ endpoint: "nandoku", queries: { filters: `prefecture[contains]${prefecture}` } })
 
   const placeList = data.contents.map((content) => {
-    const position = getPrefecturePlace(content)
+    const { position } = getPrefecturePlace(content)
     return {
       ...content,
       position,

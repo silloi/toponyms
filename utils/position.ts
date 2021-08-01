@@ -17,8 +17,22 @@ export const getPrefecturePlace = (place: any) => {
   const result = PLACE.find((item: string[]) => `${item[5]}${item[8]}`.includes(key))
 
   if (!result) {
-    return []
+    return {
+      address: '',
+      position: [],
+    }
   }
 
-  return [result[12], result[13]]
+  let address = result[1] + result[5] + result[8] + result[11].split('丁目')
+
+  // n丁目を削除
+  const pos = address.indexOf('丁目')
+  if (pos > -1) {
+    address = address.slice(0, pos - 1)
+  }
+
+  return {
+    address,
+    position: [result[12], result[13]],
+  }
 }
