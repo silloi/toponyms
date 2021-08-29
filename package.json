@@ -6,6 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@heroicons/react": "^1.0.4",
     "leaflet": "^1.7.1",
     "microcms-js-sdk": "^1.2.0",
     "next": "latest",

@@ -2,6 +2,7 @@ import { GetStaticProps, GetStaticPaths } from 'next'
 import { useRouter } from 'next/router'
 import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
+import { ExternalLinkIcon } from '@heroicons/react/solid'
 import { client } from "../../libs/client";
 import { getPrefecturePlace } from '../../utils/position'
 import dynamic from 'next/dynamic'
@@ -21,17 +22,25 @@ export const Place = ({ place }) => {
     return (
       <div>
         <div className="p-4">
-          <h1 className="text-2xl">{place.name}（{place.kana}）</h1>
+          <h1 className="text-2xl mb-2">{place.name}（{place.kana}）</h1>
           <p>{place.address}</p>
         </div>
         <MapPlace center={place.position} zoom={17} placeList={[place]} />
         <div className="p-4">
-          <h2 className="text-xl">解説</h2>
-          <ul>
-            <li key="1">hoge</li>
-            <li key="2">hoge</li>
-            <li key="3">hoge</li>
-          </ul>
+          <h2 className="text-xl pb-2">解説</h2>
+          {place.citations.map((citation) => {
+            return (
+              <blockquote cite={citation.url || ''} className="px-4 py-2 mb-2 border-l-4 whitespace-pre-line">
+                <p key={citation.fieldId}>
+                  {citation.quotation}
+                </p>
+                {citation.url ? 
+                  <a href={citation.url}><ExternalLinkIcon className="h-5 w-5 text-blue-600" /></a>
+                  : null 
+                }
+              </blockquote>
+            )
+          })}
         </div>
       </div>
     )
