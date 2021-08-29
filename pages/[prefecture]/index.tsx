@@ -25,15 +25,20 @@ export const Prefecture = ({ prefecture, center, placeList }) => {
         <div className="p-4">
           <h1 className="text-2xl">{prefecture}の難読地名・怖い地名</h1>
         </div>
-        <div>
-          <MapPlace center={center} placeList={placeList} />
+        <MapPlace center={center} placeList={placeList}/>
+        <div className="p-4">
+          <h2 className="text-xl">地名から探す</h2>
+          <ul>
+            {placeList.map((place) => {
+              return (
+              <li key={place.id} className="">
+                <Link href={`/${prefecture.name}/${place.name}`}>
+                  <a className="hover:underline text-blue-600">{place.name}</a>
+                </Link>
+              </li>
+            )})}
+          </ul>
         </div>
-        <ul className="p-4">
-          {placeList.map((place) => {
-            return (
-            <li key={place.id}>{place.name} {place.lat}</li>
-          )})}
-        </ul>
       </div>
     )
   }

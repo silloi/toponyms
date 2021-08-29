@@ -23,7 +23,7 @@ const Map = ({ center, placeList }) => {
             <Marker key={place.id} position={place.position}>
               <Tooltip permanent interactive>
                 <Link href={`/${place.prefecture[0]}/${place.name}`}>
-                  <a>{place.name}</a>
+                  <a className="font-bold">{place.name}</a>
                 </Link>
               </Tooltip>
             </Marker>
