@@ -23,16 +23,18 @@ export const Prefecture = ({ prefecture, center, placeList }) => {
     return (
       <div>
         <div className="p-4">
-          <h1 className="text-2xl">{prefecture}の難読地名・怖い地名</h1>
+          <h1 className="text-2xl">
+            <span className="text-4xl">{prefecture}</span>
+            の難読地名・怖い地名</h1>
         </div>
         <MapPlace center={center} zoom={10} placeList={placeList}/>
         <div className="p-4">
-          <h2 className="text-xl">地名から探す</h2>
+          <h2 className="text-2xl">地名から探す</h2>
           <ul>
             {placeList.map((place) => {
               return (
               <li key={place.id}>
-                <Link href={`/${place.prefecture[0].name}/${place.name}`}>
+                <Link href={`/${place.prefecture[0]}/${place.name}`}>
                   <a className="hover:underline text-blue-600">{place.name}</a>
                 </Link>
               </li>

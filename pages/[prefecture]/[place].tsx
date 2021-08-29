@@ -22,12 +22,12 @@ export const Place = ({ place }) => {
     return (
       <div>
         <div className="p-4">
-          <h1 className="text-2xl mb-2">{place.name}（{place.kana}）</h1>
+          <h1 className="text-4xl mb-2">{place.name}（{place.kana}）</h1>
           <p>{place.address}</p>
         </div>
         <MapPlace center={place.position} zoom={17} placeList={[place]} />
         <div className="p-4">
-          <h2 className="text-xl pb-2">解説</h2>
+          <h2 className="text-2xl pb-2">解説</h2>
           {place.citations.map((citation) => {
             return (
               <blockquote cite={citation.url || ''} className="px-4 py-2 mb-2 border-l-4 whitespace-pre-line">

@@ -30,16 +30,16 @@ export const Home = ({ placeList }) => {
         </Head>
 
         <div className="p-4">
-          <h1 className="text-2xl">難読地名・怖い地名</h1>
+          <h1 className="text-4xl">難読地名・怖い地名</h1>
         </div>
         <MapPlace center={PREFECTURE[19].position} zoom={5} placeList={placeList}/>
         <div className="p-4">
-          <h2 className="text-xl">最新登録された地名</h2>
+          <h2 className="text-2xl">最新登録された地名</h2>
           <ul>
             {placeList.map((place) => {
               return (
               <li key={place.id}>
-                <Link href={`/${place.prefecture[0].name}/${place.name}`}>
+                <Link href={`/${place.prefecture[0]}/${place.name}`}>
                   <a className="hover:underline text-blue-600">{place.name}</a>
                 </Link>
               </li>
