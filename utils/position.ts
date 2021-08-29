@@ -13,8 +13,11 @@ export const getPrefecturePlace = (place: any) => {
 
   // すでに存在しない地名なら現地名townをキーとする。現地名と同一なら地名nameをそのまま使う
   const key = place.town ?? place.name
+  const city = place.city
 
-  const result = PLACE.find((item: string[]) => `${item[5]}${item[8]}`.includes(key))
+  const placeListFilteredByCity = city ? PLACE.filter((item: string[]) => item[5] === city) : PLACE
+
+  const result = placeListFilteredByCity.find((item: string[]) => item[8].includes(key))
 
   if (!result) {
     return {
