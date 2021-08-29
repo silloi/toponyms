@@ -3,9 +3,7 @@ import { MapContainer, TileLayer, Marker, Tooltip } from 'react-leaflet'
 import Head from 'next/head'
 import Link from 'next/link'
 
-const Map = ({ center, placeList }) => {
-  const [zoom, setZoom] = useState(10);
-
+const Map = ({ center, zoom, placeList }) => {
   return (
     <div>
       <Head>
@@ -13,7 +11,7 @@ const Map = ({ center, placeList }) => {
     integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
     crossOrigin=""/>
       </Head>
-      <MapContainer center={center} zoom={zoom} style={{ height: "50vh" }}>
+      <MapContainer center={center} zoom={zoom || 10} style={{ height: "50vh" }}>
         <TileLayer
           attribution='&amp;copy <a href="http://osm.org/copyright";>OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

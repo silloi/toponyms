@@ -24,7 +24,15 @@ export const Place = ({ place }) => {
           <h1 className="text-2xl">{place.name}（{place.kana}）</h1>
           <p>{place.address}</p>
         </div>
-        <MapPlace center={place.position} placeList={[place]} />
+        <MapPlace center={place.position} zoom={17} placeList={[place]} />
+        <div className="p-4">
+          <h2 className="text-xl">解説</h2>
+          <ul>
+            <li key="1">hoge</li>
+            <li key="2">hoge</li>
+            <li key="3">hoge</li>
+          </ul>
+        </div>
       </div>
     )
   }
