@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import { GetStaticProps, GetStaticPaths } from 'next'
 import { useRouter } from 'next/router'
 import { useState, useMemo, useEffect } from 'react'
@@ -9,7 +8,6 @@ import dynamic from 'next/dynamic'
 
 export const Place = ({ place }) => {
   const router = useRouter()
-  const [searchText, setSearchText] = useState('')
 
   /**
    * Get Map component to import leaflet with CSR
@@ -22,7 +20,7 @@ export const Place = ({ place }) => {
   } else {
     return (
       <div>
-        <div className="px-4">
+        <div className="p-4">
           <h1 className="text-2xl">{place.name}（{place.kana}）</h1>
           <p>{place.address}</p>
         </div>

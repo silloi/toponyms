@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import { GetStaticProps, GetStaticPaths } from 'next'
 import { useRouter } from 'next/router'
 import { useState, useMemo, useEffect } from 'react'
@@ -23,18 +22,18 @@ export const Prefecture = ({ prefecture, center, placeList }) => {
   } else {
     return (
       <div>
-        <div className="px-4">
+        <div className="p-4">
           <h1 className="text-2xl">{prefecture}の難読地名・怖い地名</h1>
         </div>
         <div>
-          <MapPlace center={center} placeList={placeList}/>
+          <MapPlace center={center} placeList={placeList} />
         </div>
-        <div className="px-4">
+        <ul className="p-4">
           {placeList.map((place) => {
             return (
             <li key={place.id}>{place.name} {place.lat}</li>
           )})}
-        </div>
+        </ul>
       </div>
     )
   }
