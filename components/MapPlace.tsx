@@ -4,7 +4,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 
 const Map = ({ center, placeList }) => {
-  const [zoom, setZoom] = useState(12);
+  const [zoom, setZoom] = useState(10);
 
   return (
     <div>

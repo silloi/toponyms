@@ -8,7 +8,7 @@ import { getPrefecture, getPrefecturePlace } from '../../utils/position'
 import PREFECTURE from '../../db/prefecture'
 import dynamic from 'next/dynamic'
 
-export const Prefecture = ({ center, placeList }) => {
+export const Prefecture = ({ prefecture, center, placeList }) => {
   const router = useRouter()
   const [searchText, setSearchText] = useState('')
 
@@ -23,11 +23,18 @@ export const Prefecture = ({ center, placeList }) => {
   } else {
     return (
       <div>
-        {placeList.map((place) => {
-          return (
-          <li key={place.id}>{place.name} {place.lat}</li>
-        )})}
-        <MapPlace center={center} placeList={placeList}/>
+        <div className="px-4">
+          <h1 className="text-2xl">{prefecture}の難読地名・怖い地名</h1>
+        </div>
+        <div>
+          <MapPlace center={center} placeList={placeList}/>
+        </div>
+        <div className="px-4">
+          {placeList.map((place) => {
+            return (
+            <li key={place.id}>{place.name} {place.lat}</li>
+          )})}
+        </div>
       </div>
     )
   }
@@ -59,6 +66,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   console.log('List', placeList)
   return {
     props: {
+      prefecture,
       center,
       placeList,
     },
