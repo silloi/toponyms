@@ -6,7 +6,7 @@ const Footer = () => {
 
   return (
     <footer className="bg-gray-200">
-      <div className="max-w-screen-md mx-auto px-4 py-2">
+      <nav className="max-w-screen-md mx-auto px-4 py-2">
         <h2 className="text-lg">都道府県から探す</h2>
         {regionList.map((region: string) => {
           return (
@@ -26,7 +26,7 @@ const Footer = () => {
             </div>
           )
         })}
-      </div>
+      </nav>
     </footer>
   )
 }
