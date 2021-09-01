@@ -23,14 +23,25 @@ export const Place = ({ place }) => {
       <div>
         <div className="p-4">
           <h1 className="text-4xl mb-2">{place.name}（{place.kana}）</h1>
+          <ul className="flex mb-2 space-x-2">
+            {place.categories.map((category) => {
+              return (
+                <li key={category.createdAt} className="px-1.5 border-2 rounded-md">
+                  <Link href={`/#${category.name}`}>
+                    <a>#{category.name}</a>
+                  </Link>
+                </li>
+              )
+            })}
+          </ul>
           <p>{place.address}</p>
         </div>
         <MapPlace center={place.position} zoom={17} placeList={[place]} />
         <div className="p-4">
           <h2 className="text-2xl pb-2">解説</h2>
-          {place.citations.map((citation) => {
+          {place.citations.map((citation, index) => {
             return (
-              <blockquote cite={citation.url || ''} className="px-4 py-2 mb-2 border-l-4 whitespace-pre-line">
+              <blockquote cite={citation.url || ''} key={index} className="px-4 py-2 mb-2 border-l-4 whitespace-pre-line">
                 <p key={citation.fieldId}>
                   {citation.quotation}
                 </p>
