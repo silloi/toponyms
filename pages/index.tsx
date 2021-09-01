@@ -8,10 +8,22 @@ import { getPrefecturePlace } from '../utils/position'
 import PREFECTURE from '../db/prefecture'
 import dynamic from 'next/dynamic'
 
-export const Home = ({ placeList }) => {
+export const Home = ({ placeList, categoryList }) => {
   const router = useRouter()
+  const [hash, setHash] = useState('')
 
-  const regionList = Array.from(new Set(PREFECTURE.map((prefecture) => prefecture.region)))
+  const [placeListFiltered, setPlaceListFiltered] = useState(placeList)
+
+  useEffect(() => {
+    const newHash = decodeURIComponent(router.asPath.split('#')[1] ?? '')
+    setHash(newHash)
+
+    if (newHash) {
+      setPlaceListFiltered(placeList.filter((place) => place.categories.some((category) => category.name === newHash)))
+    } else {
+      setPlaceListFiltered(placeList)
+    }
+  }, [router.asPath])
 
   /**
    * Get Map component to import leaflet with CSR
@@ -32,7 +44,25 @@ export const Home = ({ placeList }) => {
         <div className="p-4">
           <h1 className="text-4xl">難読地名・怖い地名</h1>
         </div>
-        <MapPlace center={PREFECTURE[19].position} zoom={5} placeList={placeList}/>
+
+        <div className="p-4">
+          <ul className="flex flex-wrap mb-2 space-x-2">
+            <li className={"px-1.5 mb-1 border-2 rounded-md " + (hash === '' ? 'bg-blue-100' : '')}>
+              <Link href="/">
+                <a>すべて</a>
+              </Link>
+            </li>
+            {categoryList.map((category) => (
+              <li key={category.createdAt} className={"px-1.5 mb-1 border-2 rounded-md " + (hash === category.name ? 'bg-blue-100' : '')}>
+                <Link href={`/#${category.name}`}>
+                  <a>#{category.name}</a>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <MapPlace center={PREFECTURE[19].position} zoom={5} placeList={placeListFiltered}/>
         <div className="p-4">
           <h2 className="text-2xl">最新登録された地名</h2>
           <ul>
@@ -62,9 +92,13 @@ export const getStaticProps: GetStaticProps = async () => {
     }
   })
 
+  const dataCategories: any = await client.get({ endpoint: "category" })
+  const categoryList = dataCategories.contents
+
   return {
     props: {
       placeList,
+      categoryList,
     },
   }
 }

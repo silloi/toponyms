@@ -23,7 +23,7 @@ export const Place = ({ place }) => {
       <div>
         <div className="p-4">
           <h1 className="text-4xl mb-2">{place.name}（{place.kana}）</h1>
-          <ul className="flex mb-2 space-x-2">
+          <ul className="flex flex-wrap mb-2 space-x-2">
             {place.categories.map((category) => {
               return (
                 <li key={category.createdAt} className="px-1.5 border-2 rounded-md">
