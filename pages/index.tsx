@@ -54,7 +54,7 @@ export const Home = ({ placeList, categoryList }) => {
             </li>
             {categoryList.map((category) => (
               <li key={category.createdAt} className={"px-1.5 mb-1 border-2 rounded-md " + (hash === category.name ? 'bg-blue-100' : '')}>
-                <Link href={`/#${category.name}`}>
+                <Link href={`/#${category.name}`} replace>
                   <a>#{category.name}</a>
                 </Link>
               </li>
