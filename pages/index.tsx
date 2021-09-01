@@ -31,6 +31,10 @@ export const Home = ({ placeList, categoryList }) => {
    */
   const MapPlace: any = dynamic(() => import('../components/MapPlace'), { ssr: false });
 
+  const truncate = (text: string) => {
+    return text.length > 140 ? text.substr(0, 140) + '…' : text
+  }
+
   if (router.isFallback) {
     return <div>Loading...</div>
   } else {
@@ -64,13 +68,20 @@ export const Home = ({ placeList, categoryList }) => {
 
         <MapPlace center={PREFECTURE[19].position} zoom={5} placeList={placeListFiltered}/>
         <div className="p-4">
-          <h2 className="text-2xl">最新登録された地名</h2>
-          <ul>
+          <h2 className="text-2xl mb-2">最新登録された地名</h2>
+          <ul className="">
             {placeList.map((place) => {
               return (
-              <li key={place.id}>
+              <li key={place.id} className="w-full border-2 rounded mb-2">
                 <Link href={`/${place.prefecture[0]}/${place.name}`}>
-                  <a className="hover:underline text-blue-600">{place.name}</a>
+                  <a className="w-full h-full block p-4">
+                    <h3 className="text-2xl mb-2">{place.name}</h3>
+                    {place.citations.length > 0 ? (
+                      <blockquote cite={truncate(place.citations[0].url) || ''} className="px-4 py-2 mb-2 border-l-4">
+                        {truncate(place.citations[0].quotation)}
+                      </blockquote>
+                    ) : null}
+                  </a>
                 </Link>
               </li>
             )})}
