@@ -7,6 +7,7 @@ import { client } from "../libs/client";
 import { getPrefecturePlace } from '../utils/position'
 import PREFECTURE from '../db/prefecture'
 import dynamic from 'next/dynamic'
+import Tag from '../components/Tag'
 
 export const Home = ({ placeList, categoryList }) => {
   const router = useRouter()
@@ -51,17 +52,16 @@ export const Home = ({ placeList, categoryList }) => {
 
         <div className="p-4">
           <ul className="flex flex-wrap mb-2 space-x-2">
-            <li className={"px-1.5 mb-1 border-2 rounded-md " + (hash === '' ? 'bg-blue-100' : '')}>
-              <Link href="/">
-                <a>すべて</a>
-              </Link>
-            </li>
+            <Tag
+              checked={hash === ""}
+              replace
+            />
             {categoryList.map((category) => (
-              <li key={category.createdAt} className={"px-1.5 mb-1 border-2 rounded-md " + (hash === category.name ? 'bg-blue-100' : '')}>
-                <Link href={`/#${category.name}`} replace>
-                  <a>#{category.name}</a>
-                </Link>
-              </li>
+              <Tag
+                name={category.name}
+                checked={hash === category.name}
+                replace
+              />
             ))}
           </ul>
         </div>

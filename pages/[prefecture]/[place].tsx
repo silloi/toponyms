@@ -6,6 +6,7 @@ import { ExternalLinkIcon } from '@heroicons/react/solid'
 import { client } from "../../libs/client";
 import { getPrefecturePlace } from '../../utils/position'
 import dynamic from 'next/dynamic'
+import Tag from '../../components/Tag'
 
 export const Place = ({ place }) => {
   const router = useRouter()
@@ -26,11 +27,9 @@ export const Place = ({ place }) => {
           <ul className="flex flex-wrap mb-2 space-x-2">
             {place.categories.map((category) => {
               return (
-                <li key={category.createdAt} className="px-1.5 border-2 rounded-md">
-                  <Link href={`/#${category.name}`}>
-                    <a>#{category.name}</a>
-                  </Link>
-                </li>
+                <Tag
+                  name={category.name}
+                />
               )
             })}
           </ul>
