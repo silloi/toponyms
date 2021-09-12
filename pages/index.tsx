@@ -71,7 +71,7 @@ export const Home = ({ placeList, categoryList }) => {
         <div className="p-4">
           <h2 className="text-2xl mb-2">最新登録された地名</h2>
           <ul className="">
-            {placeList.map((place) => {
+            {placeList.slice(0, 10).map((place) => {
               return (
               <li key={place.id} className="w-full border-2 rounded mb-2">
                 <Link href={`/${place.prefecture[0]}/${place.name}`}>
