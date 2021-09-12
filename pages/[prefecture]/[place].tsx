@@ -38,19 +38,17 @@ export const Place = ({ place }) => {
         <MapPlace center={place.position} zoom={17} placeList={[place]} />
         <div className="p-4">
           <h2 className="text-2xl pb-2">解説</h2>
-          {place.citations.map((citation, index) => {
-            return (
-              <blockquote cite={citation.url || ''} key={index} className="px-4 py-2 mb-2 border-l-4 whitespace-pre-line">
-                <p key={citation.fieldId}>
-                  {citation.quotation}
-                </p>
-                {citation.url ? 
-                  <a href={citation.url}><ExternalLinkIcon className="h-5 w-5 text-blue-600" /></a>
-                  : null 
-                }
-              </blockquote>
-            )
-          })}
+          {place.citationQuote1 ?  (
+            <blockquote cite={place.citationUrl1 || ''} className="px-4 py-2 mb-2 border-l-4 whitespace-pre-line">
+              <p>
+                {place.citationQuote1}
+              </p>
+              {place.citationUrl1 ? 
+                <a href={place.citationUrl1}><ExternalLinkIcon className="h-5 w-5 text-blue-600" /></a>
+                : null 
+              }
+            </blockquote>
+          ) : null}
         </div>
       </div>
     )
@@ -58,7 +56,7 @@ export const Place = ({ place }) => {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const data: any = await client.get({ endpoint: 'nandoku' });
+  const data: any = await client.get({ endpoint: 'chimei' });
 
   const paths = data.contents.map((content) => `/${content.prefecture[0]}/${content.name}`);
   return { paths, fallback: false };
@@ -73,7 +71,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const prefecture = params.prefecture.toString()
   const place = params.place.toString()
   
-  const data: any = await client.get({ endpoint: "nandoku", queries: { filters: `name[equals]${place}` } })
+  const data: any = await client.get({ endpoint: "chimei", queries: { filters: `name[equals]${place}` } })
 
   const { address, position }  = getPrefecturePlace(data.contents[0])
   return {

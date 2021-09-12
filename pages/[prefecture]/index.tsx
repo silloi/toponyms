@@ -47,7 +47,7 @@ export const Prefecture = ({ prefecture, center, placeList }) => {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const data: any = await client.get({ endpoint: 'nandoku' });
+  const data: any = await client.get({ endpoint: 'chimei' });
 
   // const paths = data.contents.map((content) => `/${content.prefecture.name}`);
   const paths = PREFECTURE.map((prefecture) => `/${prefecture.name}`)
@@ -59,7 +59,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const center = getPrefecture(prefecture)
   
-  const data: any = await client.get({ endpoint: "nandoku", queries: { filters: `prefecture[contains]${prefecture}` } })
+  const data: any = await client.get({ endpoint: "chimei", queries: { filters: `prefecture[contains]${prefecture}`, limit: 1000 } })
 
   const placeList = data.contents.map((content) => {
     const { position } = getPrefecturePlace(content)

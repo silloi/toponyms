@@ -76,9 +76,9 @@ export const Home = ({ placeList, categoryList }) => {
                 <Link href={`/${place.prefecture[0]}/${place.name}`}>
                   <a className="w-full h-full block p-4">
                     <h3 className="text-2xl mb-2">{place.name}</h3>
-                    {place.citations.length > 0 ? (
-                      <blockquote cite={truncate(place.citations[0].url) || ''} className="px-4 py-2 mb-2 border-l-4">
-                        {truncate(place.citations[0].quotation)}
+                    {place.citationQuote1 ? (
+                      <blockquote cite={truncate(place.citationQuote1) || ''} className="px-4 py-2 mb-2 border-l-4">
+                        {truncate(place.citationQuote1)}
                       </blockquote>
                     ) : null}
                   </a>
@@ -93,7 +93,7 @@ export const Home = ({ placeList, categoryList }) => {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const data: any = await client.get({ endpoint: "nandoku" })
+  const data: any = await client.get({ endpoint: "chimei", queries: { limit: 1000 } })
 
   const placeList = data.contents.map((content) => {
     const { position } = getPrefecturePlace(content)
