@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
 import { ExternalLinkIcon } from '@heroicons/react/solid'
-import { client } from "../../libs/client";
+import { client } from "../../lib/client";
 import { getPrefecturePlace } from '../../utils/position'
 import dynamic from 'next/dynamic'
 import Tag from '../../components/Tag'

@@ -3,7 +3,7 @@ import { GetStaticProps, GetStaticPaths } from 'next'
 import { useRouter } from 'next/router'
 import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
-import { client } from "../../libs/client";
+import { client } from "../../lib/client";
 import { getPrefecture, getPrefecturePlace } from '../../utils/position'
 import PREFECTURE from '../../db/prefecture'
 import dynamic from 'next/dynamic'
