@@ -36,27 +36,29 @@ export const Place = ({ place }) => {
           <p>{place.address}</p>
         </div>
         <MapPlace center={place.position} zoom={17} placeList={[place]} />
-        <div className="p-4">
-          <h2 className="text-2xl pb-2">解説</h2>
-          {place.citationQuote1 ?  (
-            <blockquote cite={place.citationUrl1 || ''} className="px-4 py-2 mb-2 border-l-4 whitespace-pre-line">
-              <p>
-                {place.citationQuote1}
-              </p>
-              {place.citationUrl1 ? 
-                <a href={place.citationUrl1}><ExternalLinkIcon className="h-5 w-5 text-blue-600" /></a>
-                : null 
-              }
-            </blockquote>
-          ) : null}
-        </div>
+        {place.citationQuote1 ? (
+          <div className="p-4">
+            <h2 className="text-2xl pb-2">解説</h2>
+            {place.citationQuote1 ?  (
+              <blockquote cite={place.citationUrl1 || ''} className="px-4 py-2 mb-2 border-l-4 whitespace-pre-line">
+                <p>
+                  {place.citationQuote1}
+                </p>
+                {place.citationUrl1 ? 
+                  <a href={place.citationUrl1}><ExternalLinkIcon className="h-5 w-5 text-blue-600" /></a>
+                  : null 
+                }
+              </blockquote>
+            ) : null}
+          </div>
+        ) : null}
       </div>
     )
   }
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const data: any = await client.get({ endpoint: 'chimei' });
+  const data: any = await client.get({ endpoint: 'chimei', queries: { limit: 1000 } });
 
   const paths = data.contents.map((content) => `/${content.prefecture[0]}/${content.name}`);
   return { paths, fallback: false };
