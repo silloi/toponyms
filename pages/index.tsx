@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import Head from 'next/head'
 import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import { useState, useMemo, useEffect } from 'react'
@@ -42,12 +42,13 @@ export const Home = ({ placeList, categoryList }) => {
     return (
       <div>
         <Head>
-          <title>難読地名・怖い地名</title>
+          <title>日本の地名.com</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
 
         <div className="p-4">
-          <h1 className="text-4xl">難読地名・怖い地名</h1>
+          <h1 className="text-4xl pb-2">日本の地名.com</h1>
+          <p className="text-sm">難読地名・怖い地名・廃村・忌み地・パワースポット</p>
         </div>
 
         <div className="p-4">

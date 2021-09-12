@@ -5,7 +5,7 @@ const Header = () => {
     <header className="w-full shadow fixed">
       <div className="max-w-screen-md mx-auto flex px-5 h-16 items-center ">
         <Link href="/">
-          <a className="text-xl">難読地名・怖い地名</a>
+          <a className="text-xl">日本の地名.com</a>
         </Link>
       </div>
     </header>

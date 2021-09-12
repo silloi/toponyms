@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import { GetStaticProps, GetStaticPaths } from 'next'
 import { useRouter } from 'next/router'
 import { useState, useMemo, useEffect } from 'react'
@@ -22,10 +23,14 @@ export const Prefecture = ({ prefecture, center, placeList }) => {
   } else {
     return (
       <div>
+        <Head>
+          <title>{prefecture}の地名 | 日本の地名.com</title>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
         <div className="p-4">
           <h1 className="text-2xl">
             <span className="text-4xl">{prefecture}</span>
-            の難読地名・怖い地名</h1>
+            の地名</h1>
         </div>
         <MapPlace center={center} zoom={10} placeList={placeList}/>
         <div className="p-4">

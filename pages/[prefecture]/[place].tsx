@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import { GetStaticProps, GetStaticPaths } from 'next'
 import { useRouter } from 'next/router'
 import { useState, useMemo, useEffect } from 'react'
@@ -22,6 +23,10 @@ export const Place = ({ place }) => {
   } else {
     return (
       <div>
+        <Head>
+          <title>{place.name} | 日本の地名.com</title>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
         <div className="p-4">
           <h1 className="text-4xl mb-2">{place.name}（{place.kana}）</h1>
           <ul className="flex flex-wrap mb-2 space-x-2">
