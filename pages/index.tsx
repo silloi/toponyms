@@ -67,25 +67,26 @@ export const Home = ({ placeList, categoryList }) => {
           </ul>
         </div>
 
-        <MapPlace center={PREFECTURE[19].position} zoom={5} placeList={placeListFiltered}/>
+        <MapPlace center={PREFECTURE[19].position} zoom={5} placeList={placeListFiltered} />
         <div className="p-4">
           <h2 className="text-2xl mb-2">最新登録された地名</h2>
           <ul className="">
             {placeList.slice(0, 10).map((place) => {
               return (
-              <li key={place.id} className="w-full border-2 rounded mb-2">
-                <Link href={`/${place.prefecture[0]}/${place.name}`}>
-                  <a className="w-full h-full block p-4">
-                    <h3 className="text-2xl mb-2">{place.name}</h3>
-                    {place.citationQuote1 ? (
-                      <blockquote cite={truncate(place.citationQuote1) || ''} className="px-4 py-2 mb-2 border-l-4">
-                        {truncate(place.citationQuote1)}
-                      </blockquote>
-                    ) : null}
-                  </a>
-                </Link>
-              </li>
-            )})}
+                <li key={place.id} className="w-full border-2 rounded mb-2">
+                  <Link href={`/${place.prefecture[0]}/${place.name}`}>
+                    <a className="w-full h-full block p-4">
+                      <h3 className="text-2xl mb-2">{place.name}</h3>
+                      {place.citationQuote1 ? (
+                        <blockquote cite={truncate(place.citationQuote1) || ''} className="px-4 py-2 mb-2 border-l-4">
+                          {truncate(place.citationQuote1)}
+                        </blockquote>
+                      ) : null}
+                    </a>
+                  </Link>
+                </li>
+              )
+            })}
           </ul>
         </div>
       </div>
@@ -94,7 +95,7 @@ export const Home = ({ placeList, categoryList }) => {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const data: any = await client.get({ endpoint: "chimei", queries: { limit: 1000 } })
+  const data: any = await client.get({ endpoint: "chimei", queries: { limit: 1000, orders: 'publishedAt' } })
 
   const placeList = data.contents.map((content) => {
     const { position } = getPrefecturePlace(content)
