@@ -54,6 +54,7 @@ export const Home = ({ placeList, categoryList }) => {
         <div className="p-4">
           <ul className="flex flex-wrap mb-2 space-x-2">
             <Tag
+              name=""
               checked={hash === ""}
               replace
             />
