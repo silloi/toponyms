@@ -7,7 +7,6 @@ import Link from 'next/link'
 // https://github.com/PaulLeCam/react-leaflet/issues/453#issuecomment-731732137
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import './style.css';
 
 let DefaultIcon = L.icon({
   iconUrl: 'leaflet/dist/images/marker-icon.png',
